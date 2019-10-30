@@ -1,5 +1,9 @@
 export default class newsSerive{
+    constructor(newsApiKey){
+        this.newsApiKey = newsApiKey
+    }
+
     getNews(){
-        return fetch("https://newsapi.org/v1/articles?source=bbc-news&apiKey=2ed7982b8edb4e8c8f81f08dfb8889fe")
+        return fetch(`https://newsapi.org/v1/articles?source=bbc-news&apiKey=${this.newsApiKey}`)
     }
 }
