@@ -1,9 +1,7 @@
 import article from './article' 
 
 const articles = (items) =>{
-    return items.map(item =>{
-        return article(item)
-    }).join("") 
+    return items.map(article).join("") 
 }
 
 export default articles
