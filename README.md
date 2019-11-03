@@ -1,5 +1,6 @@
-JavaScript Core: ES6 + Babel + Webpack [site](https://task-01-jscore-es6-babel-webpack.netlify.com/)
+# FrontCamp
 
+## JavaScript Core: ES6 + Babel + Webpack [site](https://task-01-jscore-es6-babel-webpack.netlify.com/)
 1) Go to https://newsapi.org/
 2) Press ‘Get Api Key’ on the right
 3) Enter your desired creds and promise to add an attribution link to newsapi
@@ -11,3 +12,9 @@ JavaScript Core: ES6 + Babel + Webpack [site](https://task-01-jscore-es6-babel-w
 9) Styling is not the requirement for this task, but it will be an additional bonus;
 10) You're not allowed to use any framework :)
 11) Add attribution link, remember, you promised!
+
+## Design Patterns 
+5 stars => All for 4 stars + learn and implement architectural pattern MV*/Redux/Flux on you choice in the app;
+4 stars => All for 3 stars + Implement one behavioral pattern;
+3 stars => All for 2 stars + Implement one structural pattern;
+1-2 stars => Implement one creational pattern;

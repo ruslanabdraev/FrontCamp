@@ -1,9 +1,11 @@
 import config from './config.json'
-import newsService from './services/newsService'
+import newsServiceFactory from './factories/newsServiceFactory'
 import articles from './components/articles'
 import './style.css'
 
-const _newsService = new newsService(config.newsApiKey)
+const _newsServiceFactory = new newsServiceFactory()
+
+const _newsService = _newsServiceFactory.create()
 
 var container = document.getElementById("container")
 
