@@ -2,9 +2,9 @@ import config from './config.json'
 import newsService from './services/newsService'
 import articles from './components/articles'
 import './style.css'
-import '@babel/polyfill'
+import { newsServiceFactory } from './services/newsServiceFactory.js'
 
-const _newsService = new newsService(config.newsApiKey)
+const _newsService = newsServiceFactory(config.newsApiKey)
 
 var container = document.getElementById("container")
 
