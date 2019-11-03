@@ -1,4 +1,4 @@
-JavaScript Core: ES6 + Babel + Webpack
+JavaScript Core: ES6 + Babel + Webpack [site](https://task-01-jscore-es6-babel-webpack.netlify.com/)
 
 1) Go to https://newsapi.org/
 2) Press ‘Get Api Key’ on the right
@@ -11,5 +11,3 @@ JavaScript Core: ES6 + Babel + Webpack
 9) Styling is not the requirement for this task, but it will be an additional bonus;
 10) You're not allowed to use any framework :)
 11) Add attribution link, remember, you promised!
-
-[site](https://task-01-jscore-es6-babel-webpack.netlify.com/)
