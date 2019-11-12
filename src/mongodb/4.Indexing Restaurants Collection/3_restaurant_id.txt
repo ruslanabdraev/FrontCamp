@@ -1,0 +1,101 @@
+Creating index
+===============
+db.restaurants.createIndex({restaurant_id: 1})
+
+
+before creating index
+=======================
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "frontcamp.restaurants",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "restaurant_id" : {
+                                "$eq" : "41098650"
+                        }
+                },
+                "queryHash" : "11B8AFCC",
+                "planCacheKey" : "11B8AFCC",
+                "winningPlan" : {
+                        "stage" : "PROJECTION_SIMPLE",
+                        "transformBy" : {
+                                "_id" : 0,
+                                "borough" : 1
+                        },
+                        "inputStage" : {
+                                "stage" : "COLLSCAN",
+                                "filter" : {
+                                        "restaurant_id" : {
+                                                "$eq" : "41098650"
+                                        }
+                                },
+                                "direction" : "forward"
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "EPBYMINW6851",
+                "port" : 27017,
+                "version" : "4.2.1",
+                "gitVersion" : "edf6d45851c0b9ee15548f0f847df141764a317e"
+        },
+        "ok" : 1
+}
+
+after creating index
+=====================
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "frontcamp.restaurants",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "restaurant_id" : {
+                                "$eq" : "41098650"
+                        }
+                },
+                "queryHash" : "11B8AFCC",
+                "planCacheKey" : "A2837C36",
+                "winningPlan" : {
+                        "stage" : "PROJECTION_SIMPLE",
+                        "transformBy" : {
+                                "_id" : 0,
+                                "borough" : 1
+                        },
+                        "inputStage" : {
+                                "stage" : "FETCH",
+                                "inputStage" : {
+                                        "stage" : "IXSCAN",
+                                        "keyPattern" : {
+                                                "restaurant_id" : 1
+                                        },
+                                        "indexName" : "restaurant_id",
+                                        "isMultiKey" : false,
+                                        "multiKeyPaths" : {
+                                                "restaurant_id" : [ ]
+                                        },
+                                        "isUnique" : false,
+                                        "isSparse" : false,
+                                        "isPartial" : false,
+                                        "indexVersion" : 2,
+                                        "direction" : "forward",
+                                        "indexBounds" : {
+                                                "restaurant_id" : [
+                                                        "[\"41098650\", \"41098650\"]"
+                                                ]
+                                        }
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "EPBYMINW6851",
+                "port" : 27017,
+                "version" : "4.2.1",
+                "gitVersion" : "edf6d45851c0b9ee15548f0f847df141764a317e"
+        },
+        "ok" : 1
+}
