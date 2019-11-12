@@ -1,0 +1,38 @@
+{
+    "_id" : ObjectId("5dc6cf47b2b8f51417f78a80"),
+    "address" : {
+            "building" : "2206",
+            "coord" : [
+                    -74.1377286,
+                    40.6119572
+            ],
+            "street" : "Victory Boulevard",
+            "zipcode" : "10314"
+    },
+    "borough" : "Staten Island",
+    "cuisine" : "Jewish/Kosher",
+    "grades" : [
+            {
+                    "date" : ISODate("2014-10-06T00:00:00Z"),
+                    "grade" : "A",
+                    "score" : 9
+            },
+            {
+                    "date" : ISODate("2014-05-20T00:00:00Z"),
+                    "grade" : "A",
+                    "score" : 12
+            },
+            {
+                    "date" : ISODate("2013-04-04T00:00:00Z"),
+                    "grade" : "A",
+                    "score" : 12
+            },
+            {
+                    "date" : ISODate("2012-01-24T00:00:00Z"),
+                    "grade" : "A",
+                    "score" : 9
+            }
+    ],
+    "name" : "Kosher Island",
+    "restaurant_id" : "40356442"
+}

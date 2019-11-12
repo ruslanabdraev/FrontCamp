@@ -1,0 +1,53 @@
+1. How many “Chinese” (cuisine) restaurants are in “Queens” (borough)?
+=======================================================================
+db.restaurants.find({borough: "Queens", cuisine: "Chinese"}).count() 
+
+result: 728
+
+2. What is the _id of the restaurant which has the grade with the highest ever score?
+======================================================================================
+db.restaurants.find({grade:{$exists: true}},{_id: 1}).sort({score: -1}).limit(1)
+
+result: nothing
+
+3. Add a grade { grade: "A", score: 7, date: ISODate() } to every restaurant in “Manhattan” (borough).
+======================================================================================================
+db.restaurants.updateMany({ borough: "Manhattan"}, { $push: { grades: { grade: "A", score: 7, date: ISODate() }}}) 
+
+result:
+10259
+
+4. What are the names of the restaurants which have a grade at index 8 with score less then 7? Use projection to include only names without _id.
+=================================================================================================================================================
+db.restaurants.find({ "grades.score": {$lt: 7}}, {name: 1, _id: 0})
+
+results:
+{ "name" : "Morris Park Bake Shop" }
+{ "name" : "Regina Caterers" }
+{ "name" : "Wild Asia" }
+{ "name" : "Taste The Tropics Ice Cream" }
+{ "name" : "C & C Catering Service" }
+{ "name" : "1 East 66Th Street Kitchen" }
+{ "name" : "Carvel Ice Cream" }
+{ "name" : "The Movable Feast" }
+{ "name" : "Steve Chu'S Deli & Grocery" }
+{ "name" : "Nordic Delicacies" }
+{ "name" : "Bully'S Deli" }
+{ "name" : "Dj Reynolds Pub And Restaurant" }
+{ "name" : "Riviera Caterer" }
+{ "name" : "Angelika Film Center" }
+{ "name" : "White Castle" }
+{ "name" : "Shashemene Int'L Restaura" }
+{ "name" : "Carvel Ice Cream" }
+{ "name" : "Ho Mei Restaurant" }
+{ "name" : "Mejlander & Mulgannon" }
+{ "name" : "Cafe Metro" }
+
+5. What are _id and borough of “Seafood” (cuisine) restaurants which received at least one 
+“B” grade in period from 2014-02-01 to 2014-03-01? Use projection to include only _id and borough.
+=================================================================================================================
+db.restaurants.find({cuisine: "Seafood", grades: {$elemMatch:{grade: "B", date:{ $gte: ISODate("2014-02-01T00:00:00.000Z"), $lt: ISODate("2014-03-01T00:00:00.000Z") }}}}, {borough: 1})
+
+result:
+{ "_id" : ObjectId("5dc6cf47b2b8f51417f7bfdc"), "borough" : "Bronx" }
+{ "_id" : ObjectId("5dc6cf47b2b8f51417f7c254"), "borough" : "Manhattan" }
