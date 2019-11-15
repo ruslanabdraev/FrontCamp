@@ -20,48 +20,11 @@ result:
 
 4. What are the names of the restaurants which have a grade at index 8 with score less then 7? Use projection to include only names without _id.
 =================================================================================================================================================
-db.restaurants.aggregate([
-    {
-        "$group": { 
-            "_id": null,
-            data: { $push: {
-				"$cond":[{
-					"grades.score": {$lt: 7}
-					}, 
-					{"_id": "$_id"}, 
-					null
-				]
-			}}
-        }     
-    },
-	{
-        $project: {
-            requiredResult: {
-                $map: {
-                    input: { $range: [ 0, { $size: "$data" }, 8 ] }, 
-                    as: "index",
-                    in: { $arrayElemAt: [ "$data", "$$index" ] }
-				
-            }
-        }
-		
-    }}
-])
+db.restaurants.find({"grades.8.score": {$lt: 7}},{_id:0, name:1})
 
 results:
-2019-11-15T01:59:29.918+0300 E  QUERY    [js] Error: command failed: {
-        "ok" : 0,
-        "errmsg" : "FieldPath field names may not contain '.'.",
-        "code" : 16412,
-        "codeName" : "Location16412"
-} : aggregate failed :
-_getErrorWithCode@src/mongo/shell/utils.js:25:13
-doassert@src/mongo/shell/assert.js:18:14
-_assertCommandWorked@src/mongo/shell/assert.js:583:17
-assert.commandWorked@src/mongo/shell/assert.js:673:16
-DB.prototype._runAggregate@src/mongo/shell/db.js:266:5
-DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1012:12
-@(shell):1:1
+{ "name" : "Silver Krust West Indian Restaurant" }
+{ "name" : "Pure Food" }
 
 5. What are _id and borough of “Seafood” (cuisine) restaurants which received at least one 
 “B” grade in period from 2014-02-01 to 2014-03-01? Use projection to include only _id and borough.
