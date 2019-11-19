@@ -42,3 +42,8 @@ result:
     }},{
     $limit: 3
 }])
+
+result:
+{ "city" : "Abu Dhabi, United Arab Emirates", "avgPassengers" : 8052.380952380952 }
+{ "city" : "Dubai, United Arab Emirates", "avgPassengers" : 7176.596638655462 }
+{ "city" : "Guangzhou, China", "avgPassengers" : 7103.333333333333 }
