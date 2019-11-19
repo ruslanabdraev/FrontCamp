@@ -47,3 +47,28 @@ result:
 { "city" : "Abu Dhabi, United Arab Emirates", "avgPassengers" : 8052.380952380952 }
 { "city" : "Dubai, United Arab Emirates", "avgPassengers" : 7176.596638655462 }
 { "city" : "Guangzhou, China", "avgPassengers" : 7103.333333333333 }
+
+
+3. Which carriers provide flights to Latvia (destCountry)? 
+Show result as one document { "_id" : "Latvia", "carriers" : [ "carrier1", " carrier2", …] }
+=============================================================================================
+db.airlines.aggregate([{
+    $match: { 
+        destCountry: "Latvia"
+    }}, {
+    $group: {
+        _id: "$destCountry", 
+        carriers: {
+            $addToSet: "$carrier"
+        }}
+}]).pretty()
+
+result:
+{
+        "_id" : "Latvia",
+        "carriers" : [
+                "JetClub AG",
+                "Blue Jet SP Z o o",
+                "Uzbekistan Airways"
+        ]
+}
