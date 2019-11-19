@@ -1,0 +1,12 @@
+{
+    "_id" : ObjectId("5dd3ea11c4605b8a28fcee25"),
+    "passengers" : 0,
+    "carrier" : "Korean Air Lines Co. Ltd.",
+    "originCity" : "Anchorage, AK",
+    "originState" : "Alaska",
+    "originCountry" : "United States",
+    "destCity" : "Seoul, South Korea",
+    "destState" : "",
+    "destCountry" : "South Korea",
+    "class" : "G"
+}
