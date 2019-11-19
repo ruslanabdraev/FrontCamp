@@ -17,3 +17,28 @@ result:
 { "class" : "G", "total" : 17499 }
 { "class" : "P", "total" : 5683 }
 { "class" : "F", "total" : 140343 }
+
+
+2. What are the top 3 destination cities outside of the United States (destCountry field, not included) 
+   with the highest average passengers count? Show result as { "avgPassengers" : 2312.380, "city" : "Minsk, Belarus" }
+=======================================================================================================================
+ db.airlines.aggregate([{
+     $match: {
+         destCountry:{
+             "$ne": "United States"
+        }}},{
+    $group: {
+        _id: "$destCity", 
+        avgPassengers: {
+            $avg: "$passengers"
+        }}}, {
+    $sort: {
+        avgPassengers: -1
+        }},{
+    $project:{
+        _id: 0,
+        city: "$_id",
+        avgPassengers: "$avgPassengers"
+    }},{
+    $limit: 3
+}])
