@@ -1,0 +1,104 @@
+Creating index
+===============
+db.restaurants.createIndex( { grades.score: 1 } )
+
+
+
+before creating index
+======================
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "frontcamp.restaurants",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "grades.score" : {
+                                "$lt" : 7
+                        }
+                },
+                "queryHash" : "C9DA15B4",
+                "planCacheKey" : "C9DA15B4",
+                "winningPlan" : {
+                        "stage" : "PROJECTION_SIMPLE",
+                        "transformBy" : {
+                                "name" : 1,
+                                "_id" : 0
+                        },
+                        "inputStage" : {
+                                "stage" : "COLLSCAN",
+                                "filter" : {
+                                        "grades.score" : {
+                                                "$lt" : 7
+                                        }
+                                },
+                                "direction" : "forward"
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "EPBYMINW6851",
+                "port" : 27017,
+                "version" : "4.2.1",
+                "gitVersion" : "edf6d45851c0b9ee15548f0f847df141764a317e"
+        },
+        "ok" : 1
+}
+
+after creating index
+======================
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "frontcamp.restaurants",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "grades.score" : {
+                                "$lt" : 7
+                        }
+                },
+                "queryHash" : "C9DA15B4",
+                "planCacheKey" : "57C65390",
+                "winningPlan" : {
+                        "stage" : "PROJECTION_SIMPLE",
+                        "transformBy" : {
+                                "name" : 1,
+                                "_id" : 0
+                        },
+                        "inputStage" : {
+                                "stage" : "FETCH",
+                                "inputStage" : {
+                                        "stage" : "IXSCAN",
+                                        "keyPattern" : {
+                                                "grades.score" : 1
+                                        },
+                                        "indexName" : "grades.score",
+                                        "isMultiKey" : true,
+                                        "multiKeyPaths" : {
+                                                "grades.score" : [
+                                                        "grades"
+                                                ]
+                                        },
+                                        "isUnique" : false,
+                                        "isSparse" : false,
+                                        "isPartial" : false,
+                                        "indexVersion" : 2,
+                                        "direction" : "forward",
+                                        "indexBounds" : {
+                                                "grades.score" : [
+                                                        "[-inf.0, 7.0)"
+                                                ]
+                                        }
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "EPBYMINW6851",
+                "port" : 27017,
+                "version" : "4.2.1",
+                "gitVersion" : "edf6d45851c0b9ee15548f0f847df141764a317e"
+        },
+        "ok" : 1
+}
