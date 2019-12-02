@@ -1,14 +1,26 @@
 const express = require('express')
 const app = express()
 const router = express.Router()
-const news = require('./data/news')
 const config = require('./config')
+const mongoose = require('mongoose')
 
-const checkExist = (id, res) =>{
-    if(id < 1 || id > 10){
-        throw new Error("News not found. id:" + id)
-    }
-}
+const url = 'mongodb://localhost:27017'
+const dbName = 'frontcamp'
+
+mongoose.connect(`${url}/${dbName}`, {useNewUrlParser: true})
+
+const newsModel = new mongoose.Schema({
+    id: Number,
+    author: String,
+    title: String,
+    description: String,
+    url: String,
+    urlToImage: String,
+    publishedAt: Date,
+    content: String
+})
+
+const News = mongoose.model('News', newsModel)
 
 const errorHandler = (err, req, res, next) => {
     res.status(500);
@@ -22,15 +34,24 @@ router.use((req, res, next) =>{
 
 router.get("/news", (req, res, next)=>{
     console.log("Get news")
-    res.send(news)
+
+    News.find({}).then((data)=>{
+        res.send(data)
+    })
 })
 
 router.get("/news/:id", (req, res, next)=>{
-    
-    checkExist(req.params.id, res)
+    console.log("Get news by id")
 
-    const article = news.articles.filter(item => item.id == req.params.id)
-    res.send(article)
+    const ident = req.params.id
+
+    News.findOne({ id: ident }).then((data) => {
+        if(data){
+            res.send(data)
+        }else{
+            res.status(404).send('Not Found')
+        }
+    })
 })
 
 router.post("/news", (req, res, next)=>{
@@ -39,15 +60,11 @@ router.post("/news", (req, res, next)=>{
 })
 
 router.put("/news/:id", (req, res, next)=>{
-    checkExist(req.params.id, res)
-
     console.log("Edit one news. id:", req.params.id)
     res.sendStatus(200)
 })
 
 router.delete("/news/:id", (req, res, next)=>{
-    checkExist(req.params.id, res)
-
     console.log("Delete one news. id:", req.params.id)
     res.sendStatus(200)
 })
