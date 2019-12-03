@@ -3,9 +3,11 @@ const app = express()
 const router = express.Router()
 const config = require('./config')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 const url = 'mongodb://localhost:27017'
 const dbName = 'frontcamp'
+const jsonParser = bodyParser.json()
 
 mongoose.connect(`${url}/${dbName}`, {useNewUrlParser: true})
 
@@ -35,13 +37,13 @@ router.use((req, res, next) =>{
 router.get("/news", (req, res, next)=>{
     console.log("Get news")
 
-    News.find({}).then((data)=>{
+    News.find({}).sort({id:1}).then((data)=>{
         res.send(data)
     })
 })
 
 router.get("/news/:id", (req, res, next)=>{
-    console.log("Get news by id")
+    console.log("Get news by id:", req.params.id)
 
     const ident = req.params.id
 
@@ -54,19 +56,30 @@ router.get("/news/:id", (req, res, next)=>{
     })
 })
 
-router.post("/news", (req, res, next)=>{
+router.post("/news", jsonParser, (req, res, next)=>{
     console.log("Add one news")
-    res.sendStatus(200)
+    
+    News.create(req.body).then(()=>{
+        res.sendStatus(200)
+    })
 })
 
-router.put("/news/:id", (req, res, next)=>{
+router.put("/news/:id", bodyParser, (req, res, next)=>{
     console.log("Edit one news. id:", req.params.id)
-    res.sendStatus(200)
+
+    const ident = req.params.id
+    News.updateOne({id: ident}, req.body).then(()=>{
+        res.sendStatus(200)
+    })
 })
 
 router.delete("/news/:id", (req, res, next)=>{
     console.log("Delete one news. id:", req.params.id)
-    res.sendStatus(200)
+    
+    const ident = req.params.id
+    News.deleteOne({id: ident}).then(()=>{
+        res.sendStatus(200)
+    })
 })
 
 app.use(errorHandler)
