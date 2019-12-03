@@ -63,7 +63,7 @@ router.post("/news", jsonParser, (req, res, next)=>{
     })
 })
 
-router.put("/news/:id", bodyParser, (req, res, next)=>{
+router.put("/news/:id", jsonParser, (req, res, next)=>{
     console.log("Edit one news. id:", req.params.id)
 
     const ident = req.params.id
