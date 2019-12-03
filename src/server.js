@@ -5,11 +5,10 @@ const config = require('./config')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 
-const url = 'mongodb://localhost:27017'
-const dbName = 'frontcamp'
+const url = config.mongodb
 const jsonParser = bodyParser.json()
 
-mongoose.connect(`${url}/${dbName}`, {useNewUrlParser: true})
+mongoose.connect(url, {useNewUrlParser: true})
 
 const newsModel = new mongoose.Schema({
     id: Number,
