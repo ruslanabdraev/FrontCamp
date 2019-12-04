@@ -1,3 +1,5 @@
 {
-    "newsApiKey": "2ed7982b8edb4e8c8f81f08dfb8889fe" 
+    "newsApiKey": "2ed7982b8edb4e8c8f81f08dfb8889fe",
+    "port": 8081,
+    "mongodb": "mongodb://master:master123@cluster0-shard-00-00-qgpud.mongodb.net:27017,cluster0-shard-00-01-qgpud.mongodb.net:27017,cluster0-shard-00-02-qgpud.mongodb.net:27017/frontcamp?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority"
 }
